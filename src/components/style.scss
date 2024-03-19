@@ -1,0 +1,53 @@
+@import "./loader/style";
+@import "./popover/style";
+
+
+.typography-heading {
+    font-style: normal;
+    font-weight: 400;
+    color: #000000;
+    margin: 0;
+
+    &--primary {
+        font-size: 17px;
+        font-weight: 500;
+    }
+
+    &--secondary {
+        font-size: 14px;
+    }
+}
+
+.user-avatar {
+    position: relative;
+    border: 1px solid #c1c1c1;
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.md {
+        width: 25px;
+        height: 25px;
+    }
+    &.sm {
+        width: 18px;
+        height: 18px;
+    }
+
+    .status-badge {
+        width: 8px;
+        height: 8px;
+        background: #c1c1c1;
+        border-radius: 20px;
+        position: absolute;
+        right: -2px;
+        bottom: -2px;
+
+        &.active {
+            background: #028c02;
+        }
+    }
+}

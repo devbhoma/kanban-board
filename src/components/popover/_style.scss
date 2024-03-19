@@ -1,0 +1,35 @@
+.popover-dropdown__wrapper {
+  position: relative;
+
+
+  .popover-trigger--btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+    cursor: pointer;
+    border: 1px solid #c1c1c1;
+    outline: none;
+    background: #fff;
+    border-radius: 4px;
+    padding: 7px 10px;
+    box-shadow: 1px 1px 7px #00000026;
+
+    .caret-icon {
+      margin-left: auto;
+    }
+  }
+
+  .popover-content--body {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    z-index: 99999;
+    background: #FFFFFF;
+    box-shadow: 0 4px 16px rgba(56, 46, 99, 0.15);
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+}
+

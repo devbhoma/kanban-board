@@ -2,10 +2,10 @@ import React, { useState} from "react";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 import useQuery from "../components/query.hook";
-import { DotsHorizontalIcon, UserAvatarIcon } from "../components/svg.icon";
+import { DotsHorizontalIcon } from "../components/svg.icon";
 import {UserAvatar} from "../components/avatar";
 import {TypographyPrimary, TypographySecondary} from "../components/typography";
-import {FILTERS_MAP, PRIORITY_MAP, STATUS_MAP} from "./helper";
+import {FILTERS_MAP, getColorCode, PRIORITY_MAP, STATUS_MAP} from "./helper";
 import BoardHeader from "./header";
 
 
@@ -61,18 +61,26 @@ const MainBoard = function (props) {
 
     const groupByTicket = () => {
         const groups = {}
+        let i = 0
         for (let item of tickets) {
             // @group by default - status
             let key = item.status.replaceAll(" ", "_").toLowerCase();
             let title = item.status;
             let icon = typeof STATUS_MAP[key] !== "undefined" ? STATUS_MAP[key].icon : STATUS_MAP["todo"].icon
             item.user = getUserById(item.userId)
+            item.index = i
             if (state.group === "priority") {
                 key = item.priority;
                 title = PRIORITY_MAP[item.priority].title
                 icon = PRIORITY_MAP[item.priority].icon
             } else if (state.group === "userId") {
-                icon = <UserAvatar size={"md"} status={item.available}><UserAvatarIcon/></UserAvatar>
+                icon = <UserAvatar
+                    size={"md"}
+                    style={{backgroundColor: getColorCode(item.index)}}
+                    status={item.user.available}
+                    textAvatar
+                    name={item.user.name}
+                />
                 key = item.userId;
                 title = item.user.name
             }
@@ -87,6 +95,7 @@ const MainBoard = function (props) {
             }
 
             groups[key].tickets.push(item)
+            i++
         }
 
         // @ordering
@@ -137,24 +146,32 @@ const MainBoard = function (props) {
                 const groups = groupsItems[groupKey]
                 return (<div key={groupKey} className={"board-group"}>
                     <div className={"group-header"}>
-                        <div className={"avtar"}>{groups.icon}</div>
-                        <TypographyPrimary>{groups.title} - {groups.tickets.length}</TypographyPrimary>
+                        <div className={"avatar--wrap"}>{groups.icon}</div>
+                        <TypographyPrimary className={"text-overflow"}>{groups.title} - {groups.tickets.length}</TypographyPrimary>
 
                         <button className={"btn-action"}><DotsHorizontalIcon size={20}/></button>
                     </div>
 
                     <div className={"group-tickets"}>
-                        {groups.tickets.map((item) => {
+                        {groups.tickets.map((item, i) => {
                             return <div key={item.id} className={"board-card"}>
                                 <div className={"card-header"}>
                                 <TypographySecondary style={{color: "#c1c1c1"}}>{item.id}</TypographySecondary>
-                                    {state.group !== "userId" && <UserAvatar size={"sm"} title={item.user.name} status={item.available}><UserAvatarIcon/></UserAvatar>}
+                                    {state.group !== "userId" && <UserAvatar
+                                        size={"md"} title={item.user.name} status={item.user.available}
+                                        style={{backgroundColor: getColorCode(item.index)}}
+                                        textAvatar
+                                        name={item.user.name}
+                                    />}
                                 </div>
-                                <TypographySecondary>{item.title}</TypographySecondary>
+                                <TypographySecondary className={"text-overflow"}>{item.title}</TypographySecondary>
                                 <div className={"card-footer"}>
-                                    <div className={"priority-icon"} title={PRIORITY_MAP[item.priority].title}>{PRIORITY_MAP[item.priority].icon}</div>
+                                    {state.group !== "priority" && <div
+                                        className={"priority-icon"}
+                                        title={PRIORITY_MAP[item.priority].title}>{PRIORITY_MAP[item.priority].icon}</div>}
+
                                     {item.tag && Array.isArray(item.tag) && <div className={"board-tags"}>
-                                        {item.tag.map((tag, i) => {
+                                    {item.tag.map((tag, i) => {
                                             return <span key={i} className={"tag-badge"}>{tag}</span>
                                         })}
                                     </div>}

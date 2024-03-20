@@ -1,8 +1,13 @@
-# Getting Started with Assignment Kanban Board
+# Getting Started
 
-This project was ...
+This project is an assignment for Lead Frontend Role
 
 ## Available Scripts
+
+In the project directory, you need to run the command below to install all the dependency packages.
+
+### `npm install`
+
 
 In the project directory, you can run:
 

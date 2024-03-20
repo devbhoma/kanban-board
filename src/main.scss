@@ -62,12 +62,17 @@ body {
             flex-direction: column;
             min-width: 200px;
             max-width: 350px;
+            width: 100%;
 
             .group-header {
                 display: flex;
                 align-items: center;
                 gap: 10px;
                 padding: 15px 0 20px;
+
+                .avatar--wrap {
+                    display: flex;
+                }
 
                 .btn-action {
                     margin-left: auto;
@@ -90,7 +95,7 @@ body {
                     box-shadow: 3px 5px 5px -5px #00000029;
                     display: flex;
                     flex-direction: column;
-                    gap: 15px;
+                    gap: 12px;
 
                     .card-header {
                         display: flex;
@@ -120,6 +125,7 @@ body {
                     .board-tags {
                         display: flex;
                         gap: 5px;
+                        min-height: 22px;
 
                         .tag-badge {
                             border: 1px solid #c1c1c1;

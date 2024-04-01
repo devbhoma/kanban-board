@@ -1,6 +1,6 @@
 # Getting Started
 
-This project is an assignment for Lead Frontend Role
+This project is a dynamic Kanban board that offers a comprehensive array of features for efficient task management. Leveraging an API implementation, it seamlessly integrates with external data sources, and its filtering capabilities based on specific criteria such as user assignments, task statuses, priorities, and more.
 
 ## Available Scripts
 
